@@ -46,7 +46,6 @@ course-management-system/
 
 ### Public Service
 - View Students
-- View Instructors
 - View Courses
 - Enroll Students in Courses
 
@@ -97,7 +96,7 @@ docker compose down
 
 - `/students`
 - `/instructors`
-- `/courses`
+- `/api/admin/courses`
 - `/enrollments`
 
 ### Public Service
@@ -105,7 +104,7 @@ docker compose down
 `http://localhost:8081`
 
 - `/students/{id}`
-- `/courses`
+- `/api/public/courses`
 - `/enrollments`
 
 ---
