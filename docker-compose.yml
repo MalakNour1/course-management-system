@@ -1,0 +1,52 @@
+
+services:
+
+  db:
+    image: postgres:17
+    container_name: cms-db
+
+    environment:
+      POSTGRES_DB: course_managment
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+
+    ports:
+      - "5432:5432"
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d course_managment"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  admin:
+    build: ./admin
+    container_name: cms-admin
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/course_managment
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1234
+
+  public:
+    build: ./public
+    container_name: cms-public
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    ports:
+      - "8081:8081"
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/course_managment
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1234
