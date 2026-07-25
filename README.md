@@ -104,8 +104,7 @@ docker compose down
 
 `http://localhost:8081`
 
-- `/students`
-- `/instructors`
+- `/students/{id}`
 - `/courses`
 - `/enrollments`
 
