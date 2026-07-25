@@ -1,4 +1,3 @@
-
 services:
 
   db:
@@ -20,7 +19,7 @@ services:
       retries: 5
 
   admin:
-    build: ./admin
+    image: malaknour/course-management-system-admin:latest
     container_name: cms-admin
 
     depends_on:
@@ -36,7 +35,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: 1234
 
   public:
-    build: ./public
+    image: malaknour/course-management-system-public:latest
     container_name: cms-public
 
     depends_on:
